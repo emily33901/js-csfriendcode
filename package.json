@@ -1,6 +1,6 @@
 {
   "name": "csgo-friendcode",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "CSGO friend codes to steamid64s and back again!",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,5 @@
     "url": "https://github.com/emily33901/js-csfriendcode"
   },
   "author": "Emily Hudson",
-  "license": "Simplified BSD",
-  "dependencies": {
-    "md5": "^2.3.0"
-  }
+  "license": "Simplified BSD"
 }

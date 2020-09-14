@@ -1,6 +1,7 @@
 "use strict";
 
-const md5 = require("md5");
+const crypto = require("crypto")
+
 const ByteSwap = require("./byte-swap");
 
 const alnum = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
@@ -76,7 +77,8 @@ let hash_steam_id = (id) => {
     let strange_steam_id = account_id | 0x4353474F00000000n
 
     let bytes = ByteSwap.to_little_endian(strange_steam_id)
-    let hash = md5(bytes)
+
+    let hash = crypto.createHash("md5").update(bytes).digest("hex")
     let buf = Buffer.from(hash, "hex").slice(0, 4)
 
     return ByteSwap.from_little_endian(buf)
