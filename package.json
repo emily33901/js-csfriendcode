@@ -1,17 +1,17 @@
 {
   "name": "csgo-friendcode",
-  "version": "2.0.0",
-  "description": "Generate CSGO friendcodes from steamid64s",
+  "version": "3.0.0",
+  "description": "CSGO friend codes to steamid64s and back again!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "github.com/emily33901/js-csfriendcode"
+    "url": "https://github.com/emily33901/js-csfriendcode"
   },
   "author": "Emily Hudson",
-  "license": "Simplified BSD License",
+  "license": "Simplified BSD",
   "dependencies": {
     "md5": "^2.3.0"
   }

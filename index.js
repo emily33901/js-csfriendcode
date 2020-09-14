@@ -87,7 +87,7 @@ let make_u64 = (hi, lo) => {
 }
 
 class FriendCode {
-    static friend_code(steamid) {
+    static encode(steamid) {
         steamid = BigInt(steamid)
 
         let h = hash_steam_id(steamid)
@@ -115,7 +115,7 @@ class FriendCode {
         return res
     }
 
-    static steam_id(friend_code) {
+    static decode(friend_code) {
         if (friend_code.length != 10) return "";
 
         if (friend_code.slice(0, 5) != "AAAA-") {
