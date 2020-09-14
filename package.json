@@ -1,6 +1,6 @@
 {
   "name": "csgo-friendcode",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Generate CSGO friendcodes from steamid64s",
   "main": "index.js",
   "scripts": {
