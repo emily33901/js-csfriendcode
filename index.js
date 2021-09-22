@@ -41,6 +41,7 @@ const ralnum = {
 }
 
 const default_steam_id = 0x110000100000000n
+const default_group_id = 0x170000000000000n
 
 let b32 = (input) => {
     let res = ""
@@ -117,8 +118,8 @@ class FriendCode {
         return res
     }
 
-    static decode(friend_code) {
-        if (friend_code.length != 10) return "";
+    static __decode(friend_code) {
+        if (friend_code.length != 10) return null;
 
         if (friend_code.slice(0, 5) != "AAAA-") {
             friend_code = "AAAA-" + friend_code
@@ -136,7 +137,52 @@ class FriendCode {
             id |= id_nibble
         }
 
-        return (id | default_steam_id).toString()
+        return id
+    }
+
+    static decode(friend_code) {
+        let id = FriendCode.__decode(friend_code)
+
+        if (id)
+            return (id | default_steam_id).toString()
+
+        return ""
+    }
+
+    static encode_direct_challenge(account_id) {
+        account_id = BigInt(account_id)
+        let r = () => BigInt(Math.floor(Math.random() * 0x7fff)) << 16n
+        let part1 = FriendCode.encode(r() | (account_id & 0x0000FFFFn))
+        let part2 = FriendCode.encode(r() | ((account_id & 0xFFFF0000n) >> 16n))
+
+        return `${part1}-${part2}`
+    }
+
+    static encode_direct_group_challenge(group_id) {
+        group_id = BigInt(group_id)
+        let part1 = FriendCode.encode((0x10000n) | (group_id & 0x0000FFFFn))
+        let part2 = FriendCode.encode((0x10000n) | ((group_id & 0xFFFF0000n) >> 16n))
+
+        return `${part1}-${part2}`
+    }
+
+    static decode_direct_challenge(challenge_code) {
+        if (challenge_code.length != 21) return ""
+
+        let part1 = BigInt(FriendCode.__decode(challenge_code.substr(0, 10)))
+        let part2 = BigInt(FriendCode.__decode(challenge_code.substr(11)))
+
+        let type = "u";
+        let id = (part1 & 0x0000FFFFn) | ((part2 & 0x0000FFFFn) << 16n)
+
+        if ((part1 & 0xFFFF0000n) == 0x10000n && (part2 & 0xFFFF0000n) == 0x10000n) {
+            type = "g"
+            id = id | default_group_id
+        } else {
+            id = id | default_steam_id
+        }
+
+        return `${part1},${part2},${type},${id}`
     }
 }
 
