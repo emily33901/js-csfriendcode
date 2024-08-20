@@ -2,8 +2,8 @@
 
 Based on the [go version](https://github.com/emily33901/go-csfriendcode) that I wrote initially. This takes a steamid64 and turns it into a CSGO friend code or takes a friend code and turns it into a steamid64.
 
-```js
-const FriendCode = require("csgo-friendcode");
+```ts
+import FriendCode from "csgo-friendcode";
 
 // Should be SUCVS-FADA
 console.log(FriendCode.encode(76561197960287930n));

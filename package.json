@@ -1,15 +1,33 @@
 {
   "name": "csgo-friendcode",
-  "version": "3.0.3",
+  "version": "3.0.3-bun",
   "description": "CSGO friend codes to steamid64s and back again!",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && tsc --project tsconfig.build.json"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/emily33901/js-csfriendcode"
   },
-  "author": "Emily Hudson",
-  "license": "Simplified BSD"
+  "bugs": {
+    "url": "https://github.com/emily33901/js-csfriendcode/issues"
+  },
+  "homepage": "https://github.com/emily33901/js-csfriendcode#readme",
+  "type": "module",
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/byteswap.js",
+    "dist/byteswap.d.ts"
+  ],
+  "author": "Emily Hudson, li0ard",
+  "license": "Simplified BSD",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
